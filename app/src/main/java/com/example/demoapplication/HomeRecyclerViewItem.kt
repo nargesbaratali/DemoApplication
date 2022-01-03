@@ -1,46 +1,46 @@
 package com.example.demoapplication
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-sealed class HomeRecyclerViewItem {
+ open class HomeRecyclerViewItem {
 
 
 
-    //topPost
+     @Expose
+     @SerializedName("feedType") val feedType : String = ""
+     @SerializedName("content") val content : String = ""
+     @SerializedName("createAt") val createAt : Int = 0
+     @SerializedName("dacAvatar") val dacAvatar : String = ""
+     @SerializedName("dacName") val dacName : String = ""
+     @SerializedName("images") val images : List<String> = listOf("")
+     @SerializedName("nickName") val nickName : String = ""
+     @SerializedName("video") val video : String = ""
+     @SerializedName("videoLength") val videoLength : Int = 0
+     @SerializedName("videoThumbnail") val videoThumbnail : String = ""
+     @SerializedName("videoTitle") val videoTitle : String = ""
+     @SerializedName("views") val views : Int = 0
+
+     //topPost
     class TopPost(
 
-        val feedType : String,
-         val content : String,
-         val createAt : Int,
-         val dacAvatar : String,
-         val dacName : String,
-         val images : List<String>,
-        val nickName : String,
-         val video : String,
-         val videoLength : Int,
-         val videoThumbnail : String,
-    val videoTopPost : String,
-         val views : Int
+
+         val videoTopPost : String,
         ) : HomeRecyclerViewItem()
 
     //eduTip
     class EduType(
-        val feedType: String,
-        val content: String,
         val contentType: String,
         val eduAvatar: String,
         val eduName: String,
         val title: String,
-        val views: String
     ) : HomeRecyclerViewItem()
 
     //nftsale
     class NftSale(
 
-        val feedType: String,
         val creator: Creator,
-        val dacName: String,
         val editions: String,
         val media: Media,
         val name: String,

@@ -52,11 +52,14 @@ class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    override fun getItemViewType(position: Int): Int {
-        return when(items[0-5]){
-            is HomeRecyclerViewItem.NftSale -> R.layout.nft_sale
-            is HomeRecyclerViewItem.EduType -> R.layout.edu_tip
-            is HomeRecyclerViewItem.TopPost -> R.layout.top_post
-        }
-    }
+//    override fun getItemViewType(position: Int): Int {
+//        return when(items[0-5]){
+//            is HomeRecyclerViewItem.NftSale -> R.layout.nft_sale
+//            is HomeRecyclerViewItem.EduType -> R.layout.edu_tip
+//            is HomeRecyclerViewItem.TopPost -> R.layout.top_post
+//            else -> {
+//                print("st")
+//            }
+//        }
+//    }
 }
