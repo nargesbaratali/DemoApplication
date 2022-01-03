@@ -9,7 +9,7 @@ import com.example.demoapplication.databinding.TopPostBinding
 
 class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
 
-    var items = listOf<HomeRecyclerViewItem>()
+    var items = listOf<DataModel>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -44,19 +44,20 @@ class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
         when(holder){
-            is HomeRecyclerViewHolder.NftSaleViewHolder -> holder.bind(items[3] as HomeRecyclerViewItem.NftSale)
-            is HomeRecyclerViewHolder.EduTypeViewHolder -> holder.bind(items[1] as HomeRecyclerViewItem.EduType)
-            is HomeRecyclerViewHolder.TopPostViewHolder -> holder.bind(items[0] as HomeRecyclerViewItem.TopPost)
+            is HomeRecyclerViewHolder.NftSaleViewHolder -> holder.bind(items[3] as DataModel)
+            is HomeRecyclerViewHolder.EduTypeViewHolder -> holder.bind(items[1] as DataModel)
+            is HomeRecyclerViewHolder.TopPostViewHolder -> holder.bind(items[0] as DataModel)
         }
     }
 
     override fun getItemCount() = items.size
 
-    override fun getItemViewType(position: Int): Int {
-        return when(items[0-5]){
-            is HomeRecyclerViewItem.NftSale -> R.layout.nft_sale
-            is HomeRecyclerViewItem.EduType -> R.layout.edu_tip
-            is HomeRecyclerViewItem.TopPost -> R.layout.top_post
-        }
-    }
+//    override fun getItemViewType(position: Int): Array<Int> {
+//        return arrayOf(
+//            when (items[0 - 5]) {
+//                is DataModel[0] -> R.layout.edu_tip
+//                is HomeRecyclerViewItem.TopPost -> R.layout.top_post
+//            }
+//        )
+//    }
 }

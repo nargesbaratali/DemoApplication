@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class DataAdpter(private var dataList: List<DataModel>, private val context: Context) : RecyclerView.Adapter<DataAdpter.ViewHolder>() {
+class DataAdpter(public var dataList: List<DataModel>, private val context: Context) : RecyclerView.Adapter<DataAdpter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,9 +27,13 @@ class DataAdpter(private var dataList: List<DataModel>, private val context: Con
 
     class ViewHolder(itemLayoutView: View) : RecyclerView.ViewHolder(itemLayoutView) {
         lateinit var titleTextView: TextView
+        public lateinit var dataList: List<DataModel>
 
         init {
+
             titleTextView = itemLayoutView.findViewById(R.id.title)
+            titleTextView.text= dataList.get(0).feedType
+
 
         }
 

@@ -10,15 +10,15 @@ import com.example.demoapplication.databinding.TopPostBinding
 sealed class HomeRecyclerViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     class TopPostViewHolder(private val binding: TopPostBinding) : HomeRecyclerViewHolder(binding){
-        fun bind(TopPost: HomeRecyclerViewItem.TopPost){
-            binding.textViewTopPost.text = TopPost.content
+        fun bind(TopPost: DataModel){
+            binding.textViewTopPost.text = TopPost.feedType
         }
     }
 
     class EduTypeViewHolder(private val binding: EduTipBinding) : HomeRecyclerViewHolder(binding){
-        fun bind(EduType: HomeRecyclerViewItem.EduType){
+        fun bind(EduType: DataModel){
 
-            binding.edutipTitle.text = EduType.title
+            binding.edutipTitle.text = EduType.content
 
             //  binding.imageViewEduType.loadImage(EduType.)
         }
@@ -26,9 +26,9 @@ sealed class HomeRecyclerViewHolder(binding: ViewBinding) : RecyclerView.ViewHol
 
     class NftSaleViewHolder(private val binding: NftSaleBinding) : HomeRecyclerViewHolder(binding){
         @SuppressLint("StringFormatInvalid")
-        fun bind(NftSale: HomeRecyclerViewItem.NftSale){
+        fun bind(NftSale: DataModel){
            // binding.imageViewNftSale.loadImage(NftSale.)
-            binding.textViewName.text = NftSale.name
+            binding.textViewName.text = NftSale.dacName
           //  binding.textViewEduTypes.text = binding.textViewEduTypes.context.getString(R.string.total_EduTypes, NftSale.EduType_count)
         }
     }

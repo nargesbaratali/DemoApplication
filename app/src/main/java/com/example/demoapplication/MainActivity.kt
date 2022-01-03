@@ -13,6 +13,8 @@ import com.example.demoapplication.data.network.ApiClient
 import com.example.demoapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.edu_tip.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -28,12 +30,13 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<HomeViewModel>()
     private val homeRecyclerViewAdapter = HomeRecyclerViewAdapter()
     lateinit var myadapter:DataAdpter
+    lateinit var eduType: HomeRecyclerViewItem.EduType
 
 
     // lateinit var progerssProgressDialog: ProgressDialog
     var dataList = ArrayList<DataModel>()
    // lateinit var recyclerView: RecyclerView
-    lateinit var adapter:HomeRecyclerViewAdapter
+    lateinit var adapter:DataAdpter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,19 +46,19 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView.adapter= DataAdpter(dataList,this)
 //        recyclerView.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
-        viewModel.homeListItemsLiveData.observe(this){ result ->
-            when(result){
-                is Resource.Failure -> {
-                    binding.progressBar.hide()
-                    //handle failure case here
-                }
-                Resource.Loading -> binding.progressBar.show()
-                is Resource.Success<*> -> {
-                    binding.progressBar.hide()
-                    homeRecyclerViewAdapter.items = result.value as List<HomeRecyclerViewItem>
-                }
-            }
-        }
+//        viewModel.homeListItemsLiveData.observe(this){ result ->
+//            when(result){
+//                is Resource.Failure -> {
+//                    binding.progressBar.hide()
+//                    //handle failure case here
+//                }
+//                Resource.Loading -> binding.progressBar.show()
+//                is Resource.Success<*> -> {
+//                    binding.progressBar.hide()
+//                    homeRecyclerViewAdapter.items = result.value as List<HomeRecyclerViewItem>
+//                }
+//            }
+//        }
         getData()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -82,6 +85,16 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<DataModel>>?
             ) {
                 print("res")
+                if (response != null) {
+               //     edutipTitle.text = response.body()?.get(1)?.feedType
+                    response.body()?.let { print (it.size) }
+
+
+
+
+
+
+                }
                 // progerssProgressDialog.dismiss()
                 dataList.addAll(response!!.body()!!)
                 //    recyclerView.adapter?.notifyDataSetChanged()
