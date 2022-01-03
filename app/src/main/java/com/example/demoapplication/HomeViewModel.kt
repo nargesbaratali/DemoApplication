@@ -36,10 +36,10 @@ public class HomeViewModel
 
         val homeItemsList = mutableListOf<HomeRecyclerViewItem>()
         if(EduTypes is Resource.Success<*> ){
-           // homeItemsList.add(HomeRecyclerViewItem.TopPost("", "Recommended EduTypes"  ))
+            homeItemsList.add(HomeRecyclerViewItem.TopPost(""  ))
             homeItemsList.addAll(EduTypes.value as Collection<HomeRecyclerViewItem>)
-          //  homeItemsList.add(HomeRecyclerViewItem.TopPost("", "Top NftSales"))
-          //  homeItemsList.addAll(NftSales. as Collection<HomeRecyclerViewItem>)
+            homeItemsList.add(HomeRecyclerViewItem.TopPost(""))
+         //   homeItemsList.addAll(NftSales.value as Collection<HomeRecyclerViewItem>)
             _homeListItemsLiveData.postValue(Resource.Success(homeItemsList))
         }else{
             Resource.Failure(false, null, null)

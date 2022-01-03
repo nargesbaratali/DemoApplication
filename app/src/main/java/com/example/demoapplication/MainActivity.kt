@@ -1,5 +1,6 @@
 package com.example.demoapplication
 
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.edu_tip.*
+import kotlinx.android.synthetic.main.top_post.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -29,22 +31,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel by viewModels<HomeViewModel>()
     private val homeRecyclerViewAdapter = HomeRecyclerViewAdapter()
-    lateinit var myadapter:DataAdpter
+    lateinit var myadapter:HomeRecyclerViewAdapter
     lateinit var eduType: HomeRecyclerViewItem.EduType
 
 
     // lateinit var progerssProgressDialog: ProgressDialog
-    var dataList = ArrayList<DataModel>()
+    var dataList = ArrayList<HomeRecyclerViewItem>()
    // lateinit var recyclerView: RecyclerView
-    lateinit var adapter:DataAdpter
+    lateinit var adapter:HomeRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
 //        //setting up the adapter
-//        recyclerView.adapter= DataAdpter(dataList,this)
-//        recyclerView.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+       // recyclerView.adapter= HomeRecyclerViewAdapter()
+      //  recyclerView.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
 //        viewModel.homeListItemsLiveData.observe(this){ result ->
 //            when(result){
@@ -70,50 +72,46 @@ class MainActivity : AppCompatActivity() {
 
             //callApi
 
-
-
             }
         }
 
 
     private fun getData() {
-        val call: Call<List<DataModel>> = ApiClient.getClient.getData()
-        call.enqueue(object : Callback<List<DataModel>> {
+        val call: Call<List<HomeRecyclerViewItem>> = ApiClient.getClient.getData()
+        call.enqueue(object : Callback<List<HomeRecyclerViewItem>> {
 
             override fun onResponse(
-                call: Call<List<DataModel>>?,
-                response: Response<List<DataModel>>?
+                call: Call<List<HomeRecyclerViewItem>>?,
+                response: Response<List<HomeRecyclerViewItem>>?
             ) {
                 print("res")
                 if (response != null) {
                //     edutipTitle.text = response.body()?.get(1)?.feedType
                     response.body()?.let { print (it.size) }
 
+                    maintextView.text = response.body()?.get(0)?.feedType
+                }
+                // progerssProgressDialog.dismiss()
+                if (response != null) {
+                    homeRecyclerViewAdapter.items = response.body() as List<HomeRecyclerViewItem>
 
-
-
+                    print( homeRecyclerViewAdapter.items[0])
 
 
 
                 }
-                // progerssProgressDialog.dismiss()
+
                 dataList.addAll(response!!.body()!!)
                     recyclerView.adapter?.notifyDataSetChanged()
             }
 
-            override fun onFailure(call: Call<List<DataModel>>?, t: Throwable?) {
+            override fun onFailure(call: Call<List<HomeRecyclerViewItem>>?, t: Throwable?) {
                 print("fail")
                 //  progerssProgressDialog.dismiss()
             }
 
         })
     }
-
-
-
-
-
-
 
     }
 

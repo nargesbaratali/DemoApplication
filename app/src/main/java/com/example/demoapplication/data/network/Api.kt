@@ -16,7 +16,7 @@ interface Api {
 
 
     @GET(" ")
-    fun getData(): Call<List<DataModel>>
+    fun getData(): Call<List<HomeRecyclerViewItem>>
 }
 
 
