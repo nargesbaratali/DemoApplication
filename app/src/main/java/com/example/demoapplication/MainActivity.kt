@@ -1,15 +1,9 @@
 package com.example.demoapplication
 
-import android.app.Dialog
-import android.app.ProgressDialog
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.demoapplication.data.network.ApiClient
 import com.example.demoapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,12 +11,10 @@ import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.edu_tip.*
 import kotlinx.android.synthetic.main.top_post.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.lifecycle.ViewModelProviders
 
 
 @AndroidEntryPoint
@@ -33,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val homeRecyclerViewAdapter = HomeRecyclerViewAdapter()
     lateinit var myadapter:HomeRecyclerViewAdapter
     lateinit var eduType: HomeRecyclerViewItem.EduType
+    // lateinit var vm: HomeViewModel
 
 
     // lateinit var progerssProgressDialog: ProgressDialog
@@ -43,10 +36,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        //setting up the adapter
-       // recyclerView.adapter= HomeRecyclerViewAdapter()
-      //  recyclerView.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        binding.recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = homeRecyclerViewAdapter
+        }
+
+
+
+
 
 //        viewModel.homeListItemsLiveData.observe(this){ result ->
 //            when(result){
@@ -62,17 +63,7 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
         getData()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        binding.recyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = adapter
-
-            //callApi
-
-            }
         }
 
 
