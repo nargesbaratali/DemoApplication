@@ -44,22 +44,22 @@ class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
 
     override fun onBindViewHolder(holder: HomeRecyclerViewHolder, position: Int) {
         when(holder){
-            is HomeRecyclerViewHolder.NftSaleViewHolder -> holder.bind(items[3] as HomeRecyclerViewItem.NftSale)
-            is HomeRecyclerViewHolder.EduTypeViewHolder -> holder.bind(items[1] as HomeRecyclerViewItem.EduType)
-            is HomeRecyclerViewHolder.TopPostViewHolder -> holder.bind(items[0] as HomeRecyclerViewItem.TopPost)
+            is HomeRecyclerViewHolder.NftSaleViewHolder -> holder.bind(items[position] as HomeRecyclerViewItem.NftSale)
+            is HomeRecyclerViewHolder.EduTypeViewHolder -> holder.bind(items[position] as HomeRecyclerViewItem.EduType)
+            is HomeRecyclerViewHolder.TopPostViewHolder -> holder.bind(items[position] as HomeRecyclerViewItem.TopPost)
         }
     }
 
     override fun getItemCount() = items.size
 
-//    override fun getItemViewType(position: Int): Int {
-//        return when(items[0-5]){
-//            is HomeRecyclerViewItem.NftSale -> R.layout.nft_sale
-//            is HomeRecyclerViewItem.EduType -> R.layout.edu_tip
-//            is HomeRecyclerViewItem.TopPost -> R.layout.top_post
-//            else -> {
-//                print("st")
-//            }
-//        }
-//    }
+    override fun getItemViewType(position: Int): Int {
+        return when(items[position]){
+            is HomeRecyclerViewItem.NftSale -> R.layout.nft_sale
+            is HomeRecyclerViewItem.EduType -> R.layout.edu_tip
+            is HomeRecyclerViewItem.TopPost -> R.layout.top_post
+
+            else -> {throw IllegalArgumentException("Invalid ViewType Provided")}
+        }
+
+    }
 }
