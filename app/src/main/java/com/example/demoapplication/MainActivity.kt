@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        //setting up the adapter
+//        //setting up the adapter
 //        recyclerView.adapter= DataAdpter(dataList,this)
 //        recyclerView.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
@@ -94,10 +94,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
                 }
                 // progerssProgressDialog.dismiss()
                 dataList.addAll(response!!.body()!!)
-                //    recyclerView.adapter?.notifyDataSetChanged()
+                    recyclerView.adapter?.notifyDataSetChanged()
             }
 
             override fun onFailure(call: Call<List<DataModel>>?, t: Throwable?) {

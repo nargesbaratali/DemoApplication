@@ -9,9 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 
 class DataAdpter(public var dataList: List<DataModel>, private val context: Context) : RecyclerView.Adapter<DataAdpter.ViewHolder>() {
 
-
+    var items = listOf<DataModel>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.top_post, parent, false))
+
+
     }
 
     override fun getItemCount(): Int {
